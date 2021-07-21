@@ -22,22 +22,35 @@
   flex-wrap: wrap;
 }
 
-
-
-.left-column {
-    background: rgb(209, 209, 209);
-  width: 13%;
-  margin: -8px;
+body {
+  background-image: url("./images/lobby_background.png");
+  background-blend-mode:initial;
+  opacity: 1.0;
+  background-position: cover;
+  background-repeat: space;
+  background-size: 100%
 }
 
 .middle {
-    background: white;
-    margin: -25px;
-    width: 7%;
+  background-image:inherit;
+  background-position: inherit;
+  background-repeat: inherit;
+  opacity: 1.0;
+  position:relative;
+  top: -38px;
+  margin: 9px;
+  width: 7%;
+}
+.left-column {
+  opacity: 1.0;
+  background: rgb(170, 170, 170);
+  width: 12%;
+  margin: -12px;
 }
 
+
 .right-column {
-  width: 82%;
+  width: 80%;
 }
 div.left {
     text-align: left; 
@@ -87,6 +100,7 @@ a:link    { text-decoration:     none; color: black; }
             <div class="left-column">
                 <div class="left">
                     <div id="pickup">
+                      
                         <ul>
                           <font size=5>
                             <p><big><strong>メニュー</strong></big></p>
@@ -103,6 +117,7 @@ a:link    { text-decoration:     none; color: black; }
                     <div id="social-media">
                       <ul type="none">
                         <br>
+                        <p><big><strong>Discord</strong></big></p>
                         <li><a href="https://discord.gg/R3DQhQwwKF" target="_blank"><img src="./images/discord.png" title="Discord" alt="Join our Discord!"></a></li>
                       </ul>
                     </div>
@@ -110,7 +125,7 @@ a:link    { text-decoration:     none; color: black; }
 
             </div>
             <div class = "middle">
-                <div style="border-left: 5px solid grey; line-height: 1.0em;">
+                <div style="border-left: 5px solid rgb(117, 117, 117); line-height: 1.0em;">
                     <p><br></p>
                     <p><br></p>
                     <p><br></p>

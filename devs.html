@@ -18,16 +18,35 @@
 
 
 
-.left-column {
-    background: rgb(209, 209, 209);
-  width: 13%;
-  margin: -8px;
+body {
+  background-image: url("./images/lobby_background.png");
+  background-blend-mode:initial;
+  opacity: 1.0;
+  background-position: cover;
+  background-repeat: space;
+  background-size: 100%
 }
 
 .middle {
-    background: white;
-    margin: -25px;
-    width: 7%;
+  background-image:inherit;
+  background-position: inherit;
+  background-repeat: inherit;
+  opacity: 1.0;
+  position:relative;
+  top: -38px;
+  margin: 9px;
+  width: 7%;
+}
+.left-column {
+  opacity: 1.0;
+  background: rgb(170, 170, 170);
+  width: 12%;
+  margin: -12px;
+}
+
+
+.right-column {
+  width: 80%;
 }
 div#social-media img {
     border-radius: 50%;  /*角を丸くする指定*/
@@ -35,7 +54,7 @@ div#social-media img {
     height: 40px;  /*縦幅*/
 }
 .right-column {
-  width: 82%;
+  width: 80%;
 }
 div.left {
     text-align: left; 
@@ -103,6 +122,7 @@ a:link    { text-decoration:     none; color: black; }
                     <div id="social-media">
                         <ul type="none">
                           <br>
+                          <p><big><strong>Discord</strong></big></p>
                           <li><a href="https://discord.gg/R3DQhQwwKF" target="_blank"><img src="./images/discord.png" title="Discord" alt="Join our Discord!"></a></li>
                         </ul>
                       </div>
