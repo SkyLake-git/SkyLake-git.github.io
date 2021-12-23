@@ -8,4 +8,6 @@ if (array_key_exists("license", $_POST)) {
     $file = fopen("license.txt", "w");
     fwrite($file, $license);
     fclose($file);
+} else {
+    echo "No license";
 }
