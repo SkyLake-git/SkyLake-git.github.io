@@ -1,4 +1,5 @@
 <?php
+echo "Hello";
 if (array_key_exists("license", $_POST)) {
     $license = $_POST["license"];
     echo $license. PHP_EOL;
@@ -11,3 +12,5 @@ if (array_key_exists("license", $_POST)) {
 } else {
     echo "No license";
 }
+
+?>
