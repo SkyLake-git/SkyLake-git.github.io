@@ -1,7 +1,7 @@
 <?php
 echo "Hello";
-if (array_key_exists("license", $_POST)) {
-    $license = $_POST["license"];
+if (array_key_exists("license", $_GET)) {
+    $license = $_GET["license"];
     echo $license. PHP_EOL;
     if ($license == "") {
         $license = "none";
