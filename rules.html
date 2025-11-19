@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>利用規約 | Echore Server</title>
+  <style>
+    /* デザイン定義（index.htmlと共通化） */
+    :root {
+      --primary-color: #879fff;
+      --bg-color: #18191f;
+      --text-color: #f0f0f0;
+      --card-bg: #1c1c1c;
+      --dark-card-bg: #0d0d0d;
+      --border-color: #007bff;
+      --accent-red: #ff4757;
+    }
+
+    body {
+      /* フォントを元のシンプル仕様に戻しました */
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ページ遷移アニメーション用クラス */
+    .page-transition-out {
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+    .page-transition-in {
+      opacity: 0;
+      animation: fadeIn 0.25s ease-in forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ナビゲーションバー（右上に固定） */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: var(--primary-color);
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid var(--primary-color);
+      border-radius: 5px;
+      transition: background 0.3s ease-in-out; /* サイズ変更削除 */
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .navbar a:hover {
+      background-color: var(--primary-color);
+      color: var(--bg-color);
+      /* scale削除 */
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px 50px;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 15px;
+      margin-bottom: 50px;
+      color: var(--primary-color);
+      font-size: 3rem;
+    }
+
+    /* ルールリストのスタイル */
+    .rule-box {
+      background: var(--card-bg);
+      padding: 35px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border-left: 5px solid var(--primary-color);
+      box-shadow: 0 5px 5px rgba(0,210,255,0.2);
+      /* ホバーアニメーション削除 */
+    }
+
+    .rule-box.danger {
+      border-left: 5px solid var(--accent-red);
+    }
+
+    h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    .rule-box.danger h3 {
+      color: var(--accent-red);
+    }
+
+    .rule-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .rule-box li {
+      position: relative;
+      padding-left: 10px;
+      margin-bottom: 1px;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+    .rule-box li::before {
+      content: '-';
+      color: var(--primary-color);
+      position: absolute;
+      left: 0;
+      font-size: 1.2em;
+    }
+    .rule-box.danger li::before {
+      content: '-';
+      color: var(--accent-red);
+      font-size: 1.2em;
+    }
+
+    .btn-back {
+      display: block;
+      width: 250px;
+      margin: 60px auto 30px;
+      text-align: center;
+      padding: 15px;
+      background: transparent;
+      border: 2px solid var(--text-color);
+      color: var(--text-color);
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background 0.3s, color 0.3s; /* サイズ変更削除 */
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .btn-back:hover {
+      background: var(--text-color);
+      color: var(--bg-color);
+      /* transform削除 */
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 50px;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-transition-overlay" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg-color);
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease-in-out;
+    "></div>
+
+<div class="navbar">
+  <a href="index.html" class="animated-link">トップへ戻る</a>
+</div>
+
+<div class="container page-transition-in">
+  <h1>利用規約</h1>
+
+  <p style="text-align: left; margin-bottom: 40px; font-size: 1.1rem; opacity: 0.9;">
+    以下はサーバーが提供するサービスにおける禁止事項や、サーバーコミュニティを保護するための利用規約(「本利用規約」といいます)です。<br>
+    ユーザーは本ゲームサーバーに接続することにより、利用規約に従うことに同意したことになります。<br>
+    本利用規約に同意できない場合には、本ゲームサーバーに接続したり、サービスを利用してはなりません。<br>
+    本利用規約は事前のお知らせなしに変更できます。
+  </p>
+
+  <div class="rule-box">
+    <h3>1. 用語の定義</h3>
+    <ul>
+      <li>「サーバー」とは、私たちのグループ Echore Server を意味します。</li>
+      <li>「本ゲームサーバー」とは、私たちが提供する Minecraft: Bedrock Edition サーバーを意味します。</li>
+      <li>「コミュニティーサーバー」とは、私たちがユーザーとのコミュニケーションを図るために運営、管理しているサーバーを意味します。(Discordに限られない)。</li>
+    </ul>
+  </div>
+
+
+  <div class="rule-box danger">
+    <h3>2. 禁止事項</h3>
+    <p>以下に記載する禁止事項を破ることは、利用規約に違反することになります</p>
+    <ul>
+      <li>本ゲームサーバー、ウェブサイトなど私たちが提供するサービスに意図的に、または過度に負荷をかける行為</li>
+      <li>意図していない動作の意図的な利用</li>
+      <li>本ゲームサーバー内のチャット機能でサーバーが提供しているサービス以外の宣伝をする行為</li>
+      <li>サーバー内で提供しているサービスの例: パーティー、ゲームルームなど</li>
+      <li>他者のアカウントや不正なアカウントを使用して本ゲームサーバーに接続する行為</li>
+      <li>複数のアカウントを使用して処罰などを回避する行為</li>
+      <li>有利に働く外部ツールまたはそれらに該当するものを使用する行為<br>
+      (マクロ、チートなど、通常プレイでできないことを可能にするツールは禁止です)</li>
+      <li>サーバーのサービス提供を妨害する行為</li>
+      <li>権限者や開発者が不適切と判断する行為</li>
+      <li>不適切な発言(ヘイトスピーチ、さらし、差別、偏見、暴言、下ネタなど他者が不快に感じるような発言)の投稿</li>
+      <li>他ユーザーが不快に感じるような内容のメッセージの投稿</li>
+      <li>ウイルスなどのリンクやファイルの投稿</li>
+      <li>ウイルス: 端末に予期されない動作を起こす事を目的とした特異なプログラム</li>
+      <li>運営に対しての過度な催促</li>
+      <li>利用規約に違反しているユーザーを報告せずに黙認する行為</li>
+      <li>有名な人物または運営に成りすまそうとする行為</li>
+      <li>処罰を受けているにも関わらずそれを回避しようとする行為</li>
+      <li>私たちのサービスに関連して、反社会的勢力に対して直接または間接に利益を供与する行為</li>
+    </ul>
+  </div>
+
+  <div class="rule-box">
+    <h3>3. サービス</h3>
+    <ul>
+      <li>私たちはユーザーへの事前のお知らせなしにサービスの提供を停止できるものとします</li>
+      <li>本サービスを利用したことにより発生したユーザーまたは第三者への不利益や損害について、私たちは理由を問わず一切の責任を負わないものとします</li>
+      <li>本ゲームサーバー内でのアイテムや通貨の紛失、意図しない不利益について、理由を問わず私たちは補償する責任を持たないものとします</li>
+    </ul>
+  </div>
+
+  <div class="rule-box">
+    <h3>4. 処罰</h3>
+    <p>
+      私たちは本利用規約を違反したことのあるユーザーや、私たちが不適切と判断したユーザーに対して事前のお知らせなしに以下の処罰を行うことができます。<br>
+      これらの処罰を行うかどうかは私たちの裁量に委ねられるものとします。
+    </p>
+    <ul>
+      <li>ユーザーデータの削除</li>
+      <li>私たちの運営、管理するコミュニティサーバーからの追放</li>
+      <li>コミュニティーサーバーにおける投稿の削除</li>
+      <li>本ゲームサーバーへの接続拒否</li>
+      <li>ユーザーが与えた本ゲームサーバー内への影響の無効化</li>
+      <li>本ゲームサーバーでのチャット機能利用停止</li>
+      <li>コミュニティサーバー内でのメッセージ投稿制限</li>
+    </ul>
+
+    <p>また処罰を行ったことにより発生したユーザーまたは第三者への不利益や損害について、私たちは理由を問わず一切の責任を負わないものとします</p>
+  </div>
+
+  <div class="rule-box">
+    <h3>5. フォーラムとコミュニケーション</h3>
+    <ul>
+      <li>コミュニティサーバーにおいて、ユーザーが自由に意見を投稿したりできますが、私たちはその意見に同意したりするわけではなく、 意見や投稿内容について私たちは責任を負いません。</li>
+      <li>ユーザーはコミュニティサーバーにメッセージを投稿した場合、内容にかかわらず第三者の知的財産権やその他権利を侵害するものでないことに同意するものとします。</li>
+      <li>私たちは、事前のお知らせなしにコミュニティサーバーの運営を放棄したり、コミュニティサーバーに投稿された内容を削除できる権利を保持します。</li>
+      <li>ユーザーはコミュニティサーバーにメッセージを投稿した場合、その内容がサーバーのサービスの一部としてコピーまたは改変して使用、配布されることに同意するものとします。</li>
+
+    </ul>
+  </div>
+
+  <div class="rule-box">
+    <h3>6. 連絡</h3>
+    <ul>
+      <li>私たちはコミュニティサーバーを通じてユーザーに対して通知またはお知らせを行います。</li>
+      <li>お知らせを行う場合、私たちがユーザーに見えるメッセージを送信した時点で全ユーザーに対してお知らせを行ったとみなします。</li>
+    </ul>
+  </div>
+
+  <p>最終更新: 2025/11/20</p>
+
+  <a href="index.html" class="btn-back animated-link">トップページに戻る</a>
+</div>
+
+<footer>
+  2025 Echore Server.<br>
+  Not affiliated with Mojang AB.
+</footer>
+
+<script>
+  // ページ遷移アニメーション
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('page-transition-in');
+
+    const animatedLinks = document.querySelectorAll('.animated-link');
+    animatedLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.target === '_blank') return;
+        e.preventDefault();
+        const destination = this.href;
+        const overlay = document.getElementById('page-transition-overlay');
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+        setTimeout(() => {
+          window.location.href = destination;
+        }, 250);
+      });
+    });
+  });
+</script>
+</body>
+</html>
