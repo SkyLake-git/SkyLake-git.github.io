@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echore Server | Minecraft Bedrock</title>
+    <style>
+        :root {
+            --primary-color: #879fff;
+            --bg-color: #18191f;
+            --text-color: #f0f0f0;
+            --card-bg: #1c1c1c;
+            --dark-card-bg: #0d0d0d;
+            --border-color: #007bff;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ページ遷移アニメーション */
+        .page-transition-in {
+            animation: fadeIn 0.25s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ヘッダー */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('./resources/lobby.png');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+            letter-spacing: 3px;
+            color: white;
+            text-shadow: 0 0 60px var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            opacity: 0.9;
+            color: var(--text-color);
+        }
+
+        /* 接続情報ボックス */
+        .ip-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 18px 35px;
+            border-radius: 50px;
+            margin-top: 40px;
+            border: 2px solid var(--primary-color);
+            font-family: monospace;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background 0.1s ease-in-out; /* 動きなし */
+            display: flex;
+            align-items: center;
+        }
+        .ip-box:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+        .ip-box .copy-icon {
+            margin-left: 10px;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        .ip-box.copied {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        /* ナビゲーションバー */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            transition: background 0.2s ease-in-out; /* 動きなし */
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.4s ease;
+            border: 1px solid var(--dark-card-bg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            background-color:rgba(0, 0, 0 ,0.85);
+            background-blend-mode:darken;
+            background-size: cover;
+        }
+        .feature-card:hover {
+            /* 浮き上がる動き */
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0,210,255,0.2);
+            background-color:rgba(0, 0, 0 ,0.55);
+        }
+
+        .feature-card h3 {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.4s ease;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-card:hover h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            opacity: 0.25;
+        }
+
+        .feature-card p {
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover p {
+            opacity: 0.25;
+        }
+
+        /* Discordボタン */
+        .discord-section {
+            text-align: center;
+            margin-top: 100px;
+            background: #282b30;
+            padding: 80px 20px;
+            border-radius: 20px;
+        }
+
+        .btn-discord {
+            display: inline-block;
+            background: #5865F2;
+            color: white;
+            padding: 18px 50px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            transition: background 0.2s; /* 動きなし */
+        }
+        .btn-discord:hover {
+            background: #4654e1;
+        }
+
+        /* 利用規約ボタン */
+        .rules-call-to-action {
+            text-align: center;
+            margin: 80px 0;
+        }
+        .btn-rules {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background 0.2s, color 0.2s; /* 動きなし */
+            font-weight: bold;
+        }
+        .btn-rules:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        .copyrights {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+            font-size: 0.6rem;
+            opacity: 0.05;
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<div id="page-transition-overlay" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg-color);
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease-in-out;
+    "></div>
+
+<div class="navbar">
+    <a href="rules.html" class="animated-link">利用規約</a>
+</div>
+
+<header>
+    <h1>Echore Server</h1>
+    <p class="subtitle">
+        Minecraft で本格的な アクション+ローグライト PvE を体験しよう。
+    </p>
+
+    <p class="subtitle" style="color: red;text-decoration: underline; text-decoration-color: red">
+        注意: 現在、このサーバーは一時休止中です。参加することはできません。
+    </p>
+
+    <div class="ip-box" id="ipBox" title="クリックでコピー">
+        IP: mc.echore.f5.si <span style="opacity:0.6;">, </span>Port: 52945
+    </div>
+</header>
+
+<div class="container page-transition-in">
+
+    <section>
+        <h2>SERVER FEATURES</h2>
+        <div class="features">
+            <div class="feature-card" style="background-image: url('./resources/actions.png')">
+                <h3><span class="icon"></span>アクション</h3>
+                <p>
+                    Minecraftの要素を十分に活用した、<br>
+                    爽快なアクション要素
+                </p>
+
+            </div>
+
+            <div class="feature-card" style="background-image: url('./resources/runic_armor.png')">
+                <h3><span class="icon"></span>ローグライト</h3>
+                <p>
+                    ゲーム中に自身を強化する「タレント」や、<br>
+                    恒久的な強化要素の「装備」「ルーン」システム
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="rules-call-to-action">
+        <p>サーバーに参加する前に、必ず利用規約をご確認ください。</p>
+        <a href="rules.html" class="btn-rules animated-link">利用規約を見る</a>
+    </section>
+
+    <section class="discord-section">
+        <h2 style="color: white; margin-bottom: 10px;">Discord</h2>
+        <a href="https://discord.gg/MAdpZzMuAq" class="btn-discord animated-link" target="_blank">Discordに参加する</a>
+    </section>
+
+    <section class="copyrights">
+        2025 Echore Server.<br>
+        Not affiliated with Mojang AB.
+    </section>
+
+</div>
+
+<footer>
+    このウェブサイトはGeminiを使用して作成されました。<br>
+    ヤバすぎ。
+</footer>
+
+<script>
+    // IPアドレスコピー機能
+    document.getElementById('ipBox').addEventListener('click', function() {
+        navigator.clipboard.writeText("mc.echore.f5.si:52945").then(() => {
+            let before = this.textContent
+            this.textContent = "コピーされました！";
+            this.classList.add('copied');
+            setTimeout(() => {
+                this.textContent = before;
+                this.classList.remove('copied');
+            }, 1000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    });
+
+    // ページ遷移アニメーション
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('page-transition-in');
+
+        const animatedLinks = document.querySelectorAll('.animated-link');
+        animatedLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.target === '_blank') return;
+                e.preventDefault();
+                const destination = this.href;
+                const overlay = document.getElementById('page-transition-overlay');
+                overlay.style.opacity = '1';
+                overlay.style.pointerEvents = 'auto';
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 250);
+            });
+        });
+    });
+</script>
+</body>
+</html>
